@@ -9,6 +9,14 @@ __Species occurrence deduplication API__
 
 ## Developing
 
+This is a Ruby Sinatra app, so you need Ruby (@scott using Ruby `v2.3.0dev`).
+
+```sh
+git clone git@github.com:idigbio-api-hackathon/dedup.git
+cd dedup
+bundler install
+```
+
 Run `thin start`, then hit http://localhost:3000
 
 ## The endpoints so far

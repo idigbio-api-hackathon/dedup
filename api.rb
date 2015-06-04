@@ -41,7 +41,6 @@ class DedupApp < Sinatra::Application
   end
 
   get "/heartbeat/?" do
-    $ip = request.ip
     return JSON.pretty_generate({
       "routes" => [
         "/heartbeat (GET)",

@@ -7,27 +7,37 @@ __Species occurrence deduplication API__
 
 `http://comingsoon...`
 
-## develop
+## Developing
 
 Run `thin start`, then hit http://localhost:3000
 
 ## The endpoints so far
 
-* `/heartbeat`
-* `/dedup`
+* `/` (redirects to `/heartbeat`)
+* `/heartbeat` (`GET`)
+* `/dups` (`POST`)
 
 ## On the CLI
 
-<!-- using [http](https://github.com/jakubroztocil/httpie) instead of curl -->
+using [http](https://github.com/jakubroztocil/httpie) instead of curl
 
 ### heartbeat
 
 ```sh
-curl localhost:3000/heartbeat
+http --follow localhost:3000
+```
+
+```
+{
+    "routes": [
+        "/heartbeat (GET)",
+        "/dups (POST)"
+    ]
+}
 ```
 
 ### post data
 
 ```sh
-curl -XPOST localhost:3000/dedup -d ''
+http localhost:3000/dups < test_notpretty.json
 ```

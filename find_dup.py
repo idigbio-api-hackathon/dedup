@@ -21,7 +21,7 @@ for s in segments:
     for x in data.loc[data["segment"] == s].iterrows():
         #print "comparing data to id ", x[1]["id"]
         for y in data.loc[data["segment"] == s].iterrows():
-            if x[1]["id"] == y[1]["id"]:
+            if x[1]["key"] == y[1]["key"]:
                 continue
             else:
                 i = i + 1
@@ -29,7 +29,6 @@ for s in segments:
                 if score > 0.8:
                     d = d + 1
                 results.append({"id_x":x[1]["id"], "id_y":y[1]["id"], "score":score})
-
                 
 results_df = pd.DataFrame(results)
 results_df.to_csv("output/results.csv")

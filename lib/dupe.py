@@ -10,4 +10,4 @@ def compare_fixed(x, y):
     return 0.1
 
 def compare_fuzz(x, y):
-	print fuzz.ratio(x[1]['inst_cat'], y[1]['inst_cat']) / 100.0
+	return fuzz.ratio(x[1]['inst_cat'], y[1]['inst_cat']) / 100.0

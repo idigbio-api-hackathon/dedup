@@ -19,7 +19,7 @@ results = []
 for s in segments:
     print "comparing segment ", s
     for x in data.loc[data["segment"] == s].iterrows():
-        #print "comparing data to id ", x[1]["id"]
+        #print "comparing data to id ", x[1]["key"]
         for y in data.loc[data["segment"] == s].iterrows():
             if x[1]["key"] == y[1]["key"]:
                 continue
@@ -28,7 +28,7 @@ for s in segments:
                 score = dupe.compare(comp_method, x, y)
                 if score > 0.8:
                     d = d + 1
-                results.append({"id_x":x[1]["id"], "id_y":y[1]["id"], "score":score})
+                results.append({"key_x":x[1]["key"], "key_y":y[1]["key"], "score":score})
                 
 results_df = pd.DataFrame(results)
 results_df.to_csv("output/results.csv")

@@ -6,3 +6,4 @@ def compare(method, x, y):
 
 def compare_fixed(x, y):
     return 0.1
+    

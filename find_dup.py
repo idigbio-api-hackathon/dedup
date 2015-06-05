@@ -14,7 +14,7 @@ print "Using", seg_method, "for segmentation of data set."
 print "Using", comp_method, "for comparing records."
 
 i = 0
-#results = pd.DataFrame(columns=["id_x", "id_y", "score"])
+d = 0
 results = []
 for s in segments:
     print "comparing segment ", s
@@ -25,16 +25,15 @@ for s in segments:
                 continue
             else:
                 i = i + 1
-                #results = results.set_value(r, "id_x", x[1]["id"])
-                #results = results.set_value(r, "id_y", y[1]["id"])
-                #results = results.set_value(r, "score", score)
-                results.append({"id_x":x[1]["id"], "id_y":y[1]["id"], "score":dupe.compare(comp_method, x, y)})
+                score = dupe.compare(comp_method, x, y)
+                if score > 0.8:
+                    d = d + 1
+                results.append({"id_x":x[1]["id"], "id_y":y[1]["id"], "score":score})
 
-                if i > 100:
-                    break
                 
 results_df = pd.DataFrame(results)
 results_df.to_csv("output/results.csv")
 
 print "Compared", i, "records."
+print "Found", d , "possible duplicates."
 

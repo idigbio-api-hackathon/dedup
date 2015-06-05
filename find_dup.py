@@ -9,11 +9,13 @@ comp_method = sys.argv[3]
 
 data = pd.read_csv(data_file)
 segments = segment.assign_segments(seg_method, data)
-i = 0
 
 print "Using", seg_method, "for segmentation of data set."
 print "Using", comp_method, "for comparing records."
 
+i = 0
+#results = pd.DataFrame(columns=["id_x", "id_y", "score"])
+results = []
 for s in segments:
     print "comparing segment ", s
     for x in data.loc[data["segment"] == s].iterrows():
@@ -22,12 +24,17 @@ for s in segments:
             if x[1]["id"] == y[1]["id"]:
                 continue
             else:
-                score = dupe.compare(comp_method, x, y)
                 i = i + 1
+                #results = results.set_value(r, "id_x", x[1]["id"])
+                #results = results.set_value(r, "id_y", y[1]["id"])
+                #results = results.set_value(r, "score", score)
+                results.append({"id_x":x[1]["id"], "id_y":y[1]["id"], "score":dupe.compare(comp_method, x, y)})
+
                 if i > 100:
                     break
+                
+results_df = pd.DataFrame(results)
+results_df.to_csv("output/results.csv")
 
-#print data.head()
-print segments
-print i
+print "Compared", i, "records."
 

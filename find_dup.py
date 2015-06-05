@@ -21,14 +21,14 @@ for s in segments:
     for x in data.loc[data["segment"] == s].iterrows():
         #print "comparing data to id ", x[1]["id"]
         for y in data.loc[data["segment"] == s].iterrows():
-            if x[1]["id"] == y[1]["id"]:
+            if x[1]["key"] == y[1]["key"]:
                 continue
             else:
                 i = i + 1
                 #results = results.set_value(r, "id_x", x[1]["id"])
                 #results = results.set_value(r, "id_y", y[1]["id"])
                 #results = results.set_value(r, "score", score)
-                results.append({"id_x":x[1]["id"], "id_y":y[1]["id"], "score":dupe.compare(comp_method, x, y)})
+                results.append({"id_x":x[1]["key"], "id_y":y[1]["key"], "score":dupe.compare(comp_method, x, y)})
 
                 if i > 100:
                     break
